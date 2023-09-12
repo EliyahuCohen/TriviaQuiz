@@ -1,6 +1,6 @@
-import 'package:frontend/models/user.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
+import 'package:frontend/models/user.dart'; // Import your modified User class here
 
 part 'api_service.g.dart';
 

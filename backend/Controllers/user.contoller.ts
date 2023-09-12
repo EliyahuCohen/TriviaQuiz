@@ -5,6 +5,7 @@ import User from "../Models/user.model";
 const JWT_SECRET = process.env.SECRET!; // Replace with your actual JWT secret
 
 export async function loginFunction(req: Request, res: Response) {
+  console.log("hey");
   const { email, password } = req.body;
 
   try {
