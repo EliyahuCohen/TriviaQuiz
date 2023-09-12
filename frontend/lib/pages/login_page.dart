@@ -26,21 +26,21 @@ class LoginPage extends StatelessWidget {
               children: [
                 Lottie.network(
                     "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json"),
-                SizedBox(height: 20),
-                SignInForm(), // Custom SignInForm widget for email and password fields
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
+                const SignInForm(), // Custom SignInForm widget for email and password fields
+                const SizedBox(height: 10),
 
                 InkWell(
-                  child: Text(
-                    "Not an existing user? Sign up",
-                    style: TextStyle(fontSize: 14),
-                  ),
                   onTap: () => {
                     Navigator.pushNamed(context, "/signup")
                     },
                   hoverColor: Colors.transparent,
+                  child: const Text(
+                    "Not an existing user? Sign up",
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),

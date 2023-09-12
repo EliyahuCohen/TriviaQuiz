@@ -24,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
     //check if all input fields are correct and email is not already being used
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => TriviaPage(), // Replace with the next widget you want to navigate to
+        builder: (context) => const TriviaPage(), // Replace with the next widget you want to navigate to
       ),
     );
   }
@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: const Text("Sign Up"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(40.0),
@@ -44,44 +44,44 @@ class _SignUpPageState extends State<SignUpPage> {
             Lottie.network("https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json"),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Email",
                 icon: Icon(Icons.email),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Password",
                 icon: Icon(Icons.lock),
               ),
               obscureText: true,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Username",
                 icon: Icon(Icons.person),
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: _handleSignUp,
-              child: Text("Sign Up"),
+              child: const Text("Sign Up"),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
                 // Navigate to the login page
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => LoginPage(), // Replace with your login page widget
+                    builder: (context) => const LoginPage(), // Replace with your login page widget
                   ),
                 );
               },
-              child: Text(
+              child: const Text(
                 "Already have an existing account?",
                 style: TextStyle(
                   fontSize: 12,
