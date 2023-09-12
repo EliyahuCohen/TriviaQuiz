@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/signin_page.dart';
-import 'package:frontend/pages/signup.dart';
+import 'package:frontend/Routes/routes.dart';
+import 'package:frontend/context/app_start.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppState(),
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -11,10 +15,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: "Trivia App",
       debugShowCheckedModeBanner: false,
-      home: SignInPage(),
-      routes: {},
+      routes: AppRoutes.getRoutes(),
     );
   }
 }
