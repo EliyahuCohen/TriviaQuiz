@@ -11,6 +11,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     final user = appState;
+    
 
     if (user.user != null) {
       return const Scaffold(
@@ -21,27 +22,29 @@ class LoginPage extends StatelessWidget {
         
         body: SafeArea(
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.network(
-                    "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json"),
-                const SizedBox(height: 20),
-                const SignInForm(), // Custom SignInForm widget for email and password fields
-                const SizedBox(height: 10),
-
-                InkWell(
-                  onTap: () => {
-                    Navigator.pushNamed(context, "/signup")
-                    },
-                  hoverColor: Colors.transparent,
-                  child: const Text(
-                    "Not an existing user? Sign up",
-                    style: TextStyle(fontSize: 14),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.network(
+                      "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json", width:400),
+                  const SizedBox(height: 20),
+                  const SignInForm(), // Custom SignInForm widget for email and password fields
+                  const SizedBox(height: 10),
+            
+                  InkWell(
+                    onTap: () => {
+                      Navigator.pushNamed(context, "/signup")
+                      },
+                    
+                    child: const Text(
+                      "Not an existing user? Sign up",
+                      style: TextStyle(fontSize: 14),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-              ],
+                  const SizedBox(height: 10),
+                ],
+              ),
             ),
           ),
         ),

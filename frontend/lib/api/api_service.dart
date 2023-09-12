@@ -1,6 +1,7 @@
+import 'package:frontend/types/types.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:frontend/models/user.dart'; // Import your modified User class here
+// Import your modified User class here
 
 part 'api_service.g.dart';
 
@@ -8,9 +9,17 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
+  static ApiService getApi(){
+    Dio dio = new Dio();
+    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+
+    ApiService apiService = new ApiService(dio);
+    return apiService;
+  }
+
   @POST("/login")
-  Future<User> login(@Body() User request);
+  Future<UserResponse> login(@Body() LoginRequest request);
 
   @POST("/signup")
-  Future<User> signup(@Body() User request);
+  Future<UserResponse> signup(@Body() SignUpRequest request);
 }

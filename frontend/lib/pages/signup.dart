@@ -37,59 +37,61 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(40.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.network("https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json"),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: "Email",
-                icon: Icon(Icons.email),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                hintText: "Password",
-                icon: Icon(Icons.lock),
-              ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: usernameController,
-              decoration: const InputDecoration(
-                hintText: "Username",
-                icon: Icon(Icons.person),
-              ),
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: _handleSignUp,
-              child: const Text("Sign Up"),
-            ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                // Navigate to the login page
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(), // Replace with your login page widget
-                  ),
-                );
-              },
-              child: const Text(
-                "Already have an existing account?",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blue, // You can choose any color you prefer
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.network("https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json", width: 400),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: "Email",
+                  icon: Icon(Icons.email),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  hintText: "Password",
+                  icon: Icon(Icons.lock),
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  hintText: "Username",
+                  icon: Icon(Icons.person),
+                ),
+              ),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: _handleSignUp,
+                child: const Text("Sign Up"),
+              ),
+              const SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to the login page
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(), // Replace with your login page widget
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Already have an existing account?",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.blue, // You can choose any color you prefer
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

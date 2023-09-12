@@ -5,27 +5,34 @@ import User from "../Models/user.model";
 const JWT_SECRET = process.env.SECRET!; // Replace with your actual JWT secret
 
 export async function loginFunction(req: Request, res: Response) {
-  console.log("hey");
   const { email, password } = req.body;
 
+ 
   try {
-    const user = await User.findOne({ email });
+    const newUser = await User.findOne({ email });
 
-    if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (!newUser) {
+      return res.status(401).json({ message: "Invalid email" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, newUser.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+    const token = jwt.sign({ userId: newUser._id }, process.env.SECRET!, {
       expiresIn: "1h",
     });
-
-    res.status(200).json({ message: "Login successful", token });
+    
+    console.log(newUser,  token);
+    const user={
+      id:newUser._id,
+      username:newUser.username,
+      email:newUser.email,
+      gamesPlayed:newUser.gamesPlayed
+    }
+    res.status(200).json({token,user});
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
