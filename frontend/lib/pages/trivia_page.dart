@@ -5,7 +5,7 @@ import 'package:frontend/models/quiz_question.dart';
 import 'package:provider/provider.dart';
 
 class TriviaPage extends StatelessWidget {
-  const TriviaPage({Key? key});
+  const TriviaPage({super.key, Key? pkey});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TriviaPage extends StatelessWidget {
             future: apiService.getQuestions(appState.user!.token),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {

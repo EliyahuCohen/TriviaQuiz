@@ -8,16 +8,16 @@ class QuizQuestion {
   String type;
   String difficulty;
   String question;
-  String correct_answer;
-  List<String> incorrect_answers;
+  String correctAnswer;
+  List<String> incorrectAnswers;
 
   QuizQuestion({
     required this.category,
     required this.type,
     required this.difficulty,
     required this.question,
-    required this.correct_answer,
-    required this.incorrect_answers,
+    required this.correctAnswer,
+    required this.incorrectAnswers,
   });
 
   factory QuizQuestion.fromJson(Map<String, dynamic> json) =>

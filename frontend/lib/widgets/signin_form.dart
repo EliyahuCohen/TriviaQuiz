@@ -5,7 +5,7 @@ import 'package:frontend/types/types.dart';
 import 'package:provider/provider.dart';
 
 class SignInForm extends StatefulWidget {
-  const SignInForm({Key? key}) : super(key: key);
+   const SignInForm({Key? key}) : super(key: key);
 
   @override
   _SignInFormState createState() => _SignInFormState();
@@ -25,7 +25,6 @@ class _SignInFormState extends State<SignInForm> {
           email: emailController.text, password: passwordController.text));
 
       final appState = Provider.of<AppState>(context, listen: false);
-      print("the response is: $response");
       appState.setUser(response);
       Navigator.pushNamed(context, "/");
 

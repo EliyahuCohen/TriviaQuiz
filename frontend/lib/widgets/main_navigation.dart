@@ -17,7 +17,7 @@ class MainNavigation extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello ${user?.user.username}"),
+        title: Text("Hello, ${user?.user.username}"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -63,6 +63,7 @@ class MainNavigation extends StatelessWidget {
               },
             ),
             const LogoutButton(),
+            const SizedBox(height: 30)
           ],
         ),
       ),

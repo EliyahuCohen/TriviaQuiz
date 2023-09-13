@@ -21,6 +21,7 @@ class LoginPage extends StatelessWidget {
             body: SafeArea(
               child: Center(
                 child: SingleChildScrollView(
+                   
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
