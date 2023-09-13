@@ -9,7 +9,7 @@ export async function getTrivia(req: Request, res: Response) {
     }
     const shuffledQuestions = shuffleArray(q);
 
-    const questions = shuffledQuestions.slice(0, 10);
+    const questions = shuffledQuestions.slice(0, 5);
 
     res.status(200).json(questions);
   } catch (error) {
