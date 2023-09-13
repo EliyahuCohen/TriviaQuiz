@@ -11,7 +11,7 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   bool isError = false;
-  String errorMessage="";
+  String errorMessage = "";
   late UserResponse? user;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -19,7 +19,8 @@ class _SignInFormState extends State<SignInForm> {
 
   login() async {
     try {
-      await api.login(LoginRequest(email: emailController.text, password: passwordController.text));
+      await api.login(LoginRequest(
+          email: emailController.text, password: passwordController.text));
       Navigator.pushNamed(context, "/trivia");
       setState(() {
         isError = false;
@@ -27,7 +28,7 @@ class _SignInFormState extends State<SignInForm> {
     } catch (e) {
       setState(() {
         isError = true;
-        errorMessage="error while fetching from the API";
+        errorMessage = "error while fetching from the API";
       });
     }
   }
@@ -63,22 +64,31 @@ class _SignInFormState extends State<SignInForm> {
               } else {
                 setState(() {
                   isError = true;
-                  if(emailController.text.length <10)
-                  {
-                    errorMessage="email must be at least 10 characters long";
-                  }
-                  else if(passwordController.text.length <4)
-                  {
-                    errorMessage="password must be at least 4 characters long";
+                  if (emailController.text.length < 10) {
+                    errorMessage = "email must be at least 10 characters long";
+                  } else if (passwordController.text.length < 4) {
+                    errorMessage =
+                        "password must be at least 4 characters long";
                   }
                 });
               }
               //handling error
             },
-            child: const Text("Sign In"),
+            child: Container(
+                color: Colors.amber[500],
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: const Text(
+                  "Sign In",
+                  style: TextStyle(color: Colors.white),
+                )),
           ),
-          isError ?  Text('${errorMessage}',style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),) : const Text(""),
-         
+          isError
+              ? Text(
+                  errorMessage,
+                  style:
+                      const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                )
+              : const Text(""),
         ],
       ),
     );

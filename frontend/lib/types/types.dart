@@ -8,27 +8,10 @@ class UserResponse {
   String token;
   User user;
 
-
   UserResponse({required this.token, required this.user});
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);
-
-  // factory UserResponse.fromJson(Map<String, dynamic> json) {
-  //   return UserResponse(
-  //     token: json['token'] as String,
-  //     user: json['user'] as User,
-  //   );
-  // }
-
-  // Manually define the toJson method
-
   Map<String, dynamic> toJson() => _$UserResponseToJson(this);
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'token': token,
-  //     'user': user
-  //   };
-  // }
 }
 
 @JsonSerializable()
@@ -39,6 +22,10 @@ class SignUpRequest {
 
   SignUpRequest(
       {required this.username, required this.email, required this.password});
+
+  factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
+      _$SignUpRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$SignUpRequestToJson(this);
 }
 
 @JsonSerializable()
@@ -48,17 +35,7 @@ class LoginRequest {
 
   LoginRequest({required this.email, required this.password});
 
-  factory LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
-
-  // factory LoginRequest.fromJson(Map<String, dynamic> json) {
-  //   return LoginRequest(
-  //     email: json['email'] as String,
-  //     password: json['password'] as String,
-  //   );
-  // }
+  factory LoginRequest.fromJson(Map<String, dynamic> json) =>
+      _$LoginRequestFromJson(json);
   Map<String, dynamic> toJson() => _$LoginRequestToJson(this);
-  // Manually define the toJson method
-  // Map<String, dynamic> toJson() {
-  //   return {'email': email, 'password': password};
-  // }
 }

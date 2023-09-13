@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/api/api_service.dart';
 import 'package:frontend/pages/login_page.dart';
-import 'package:frontend/pages/trivia_page.dart';
+import 'package:frontend/types/types.dart';
 import 'package:lottie/lottie.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -11,22 +12,59 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool isError = false;
+  String errorMessage = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
-  void _handleSignUp() {
-    // Implement your sign-up logic here
-    // You can access the input values using emailController.text, passwordController.text, usernameController.text
-    // Once sign-up is successful, navigate to the next widget
+  void _handleSignUp() async {
+    try {
+      setState(() {
+        isError = false;
+        errorMessage = "";
+      });
+      if (emailController.text.length < 10) {
+        setState(() {
+          isError = true;
+          errorMessage = "Invalid email (must be at least 10 characters)";
+        });
+        return;
+      }
+      if (passwordController.text.length < 4) {
+        setState(() {
+          isError = true;
+          errorMessage = "Password must be at least 4 characters";
+        });
+        return;
+      }
+      if (usernameController.text.isEmpty) {
+        setState(() {
+          isError = true;
+          errorMessage = "Invalid Username";
+        });
+        return;
+      }
+      final api = ApiService.getApi();
+      await api.signup(SignUpRequest(
+          username: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text));
 
-
-    //check if all input fields are correct and email is not already being used
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const TriviaPage(), // Replace with the next widget you want to navigate to
-      ),
-    );
+      // Navigate to the login page if signup is successful
+      Navigator.pushNamed(context, "/login");
+    } catch (e) {
+      if (e.toString().contains("Email is already in use")) {
+        setState(() {
+          errorMessage = "Email is already in use";
+        });
+      } else {
+        Navigator.pushNamed(context, "/");
+      }
+      setState(() {
+        isError = true;
+      });
+    }
   }
 
   @override
@@ -42,7 +80,10 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.network("https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json", width: 400),
+              Lottie.network(
+                  "https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json",
+                  width: 400,
+                  height: 350),
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
@@ -78,18 +119,31 @@ class _SignUpPageState extends State<SignUpPage> {
                   // Navigate to the login page
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const LoginPage(), // Replace with your login page widget
+                      builder: (context) =>
+                          const LoginPage(), // Replace with your login page widget
                     ),
                   );
                 },
-                child: const Text(
-                  "Already have an existing account?",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.blue, // You can choose any color you prefer
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Already have an existing account?",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.blue, // You can choose any color you prefer
+                    ),
                   ),
                 ),
               ),
+              isError
+                  ? Text(
+                      errorMessage,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                    )
+                  : const Text(""),
             ],
           ),
         ),

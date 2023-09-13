@@ -11,7 +11,6 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     final user = appState;
-    
 
     if (user.user != null) {
       return const Scaffold(
@@ -19,7 +18,6 @@ class LoginPage extends StatelessWidget {
       );
     } else {
       return Scaffold(
-        
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -27,19 +25,22 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.network(
-                      "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json", width:400),
+                      "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json",
+                      width: 400),
                   const SizedBox(height: 20),
                   const SignInForm(), // Custom SignInForm widget for email and password fields
                   const SizedBox(height: 10),
-            
+
                   InkWell(
-                    onTap: () => {
-                      Navigator.pushNamed(context, "/signup")
-                      },
-                    
-                    child: const Text(
-                      "Not an existing user? Sign up",
-                      style: TextStyle(fontSize: 14),
+                    onTap: () => {Navigator.pushNamed(context, "/signup")},
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Not an existing user? Sign up",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),

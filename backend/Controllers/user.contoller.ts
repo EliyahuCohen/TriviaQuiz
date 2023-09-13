@@ -25,7 +25,6 @@ export async function loginFunction(req: Request, res: Response) {
       expiresIn: "1h",
     });
     
-    console.log(newUser,  token);
     const user={
       id:newUser._id,
       username:newUser.username,
@@ -41,7 +40,6 @@ export async function loginFunction(req: Request, res: Response) {
 
 export async function signupFunction(req: Request, res: Response) {
   const { username, email, password } = req.body;
-
   try {
     const existingUser = await User.findOne({ email });
 

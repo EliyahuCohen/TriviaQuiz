@@ -10,10 +10,10 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   static ApiService getApi(){
-    Dio dio = new Dio();
+    Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
-    ApiService apiService = new ApiService(dio);
+    ApiService apiService = ApiService(dio);
     return apiService;
   }
 
