@@ -7,7 +7,7 @@ class TriviaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Trivia Page"),
+        title: const Text("Trivia Page"),
       ),
       body: const Text("This is the trivia page"),
     );

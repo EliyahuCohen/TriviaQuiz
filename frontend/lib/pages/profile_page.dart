@@ -6,13 +6,13 @@ import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: SingleChildScrollView(
         child: Consumer<AppState>(
@@ -21,31 +21,31 @@ class ProfilePage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Lottie.network(
                   "https://lottie.host/cfe530df-8c56-4f5c-a3ed-c67113e8f409/kO3mq4uBqB.json",
                   height: 300,
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Text(
                   user?.user.username ?? 'Guest',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   user?.user.email ?? 'guest@example.com',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16.0,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 _buildProfileInfoCard(user?.user),
-                SizedBox(height: 20.0),
-                LogoutButton(),
+                const SizedBox(height: 20.0),
+                const LogoutButton(),
               ],
             );
           },
@@ -56,29 +56,29 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildProfileInfoCard(User? user) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0),
       elevation: 5.0,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            const Text(
               'Profile Information',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Divider(color: Colors.grey),
+            const Divider(color: Colors.grey),
             ListTile(
-              leading: Icon(Icons.email),
-              title: Text('Email'),
+              leading: const Icon(Icons.email),
+              title: const Text('Email'),
               subtitle: Text(user?.email ?? 'guest@example.com'),
             ),
             ListTile(
-              leading: Icon(Icons.games),
-              title: Text('Games Played'),
+              leading: const Icon(Icons.games),
+              title: const Text('Games Played'),
               subtitle: Text("${user?.gamesPlayed ?? 0}"),
             ),
             // Add more profile information here as needed

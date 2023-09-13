@@ -8,7 +8,7 @@ import 'package:frontend/widgets/logout_button.dart';
 import 'package:provider/provider.dart';
 
 class MainNavigation extends StatelessWidget {
-  const MainNavigation({Key? key});
+  const MainNavigation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class MainNavigation extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -36,8 +36,8 @@ class MainNavigation extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
               onTap: () {
                 Navigator.of(context).pop(); // Close the drawer
                 Navigator.of(context)
@@ -45,8 +45,8 @@ class MainNavigation extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.history),
-              title: Text('History'),
+              leading: const Icon(Icons.history),
+              title: const Text('History'),
               onTap: () {
                 Navigator.of(context).pop(); // Close the drawer
                 Navigator.of(context)
@@ -54,15 +54,15 @@ class MainNavigation extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.games),
-              title: Text('Trivia'),
+              leading: const Icon(Icons.games),
+              title: const Text('Trivia'),
               onTap: () {
                 Navigator.of(context).pop(); // Close the drawer
                 Navigator.of(context)
                     .pushNamed('/trivia'); // Navigate to the game page
               },
             ),
-            LogoutButton(),
+            const LogoutButton(),
           ],
         ),
       ),

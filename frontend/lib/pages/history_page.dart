@@ -7,9 +7,9 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("History"),
+        title: const Text("History"),
       ),
-      body: Text("This is the history page"),
+      body: const Text("This is the history page"),
     );
   }
 }

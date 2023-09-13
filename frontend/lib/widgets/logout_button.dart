@@ -17,7 +17,7 @@ class LogoutButton extends StatelessWidget {
       children: <Widget>[
         ElevatedButton(
           onPressed: logout,
-          child: Text('Logout'),
+          child: const Text('Logout'),
         ),
       ],
     );
