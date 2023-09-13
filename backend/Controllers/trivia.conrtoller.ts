@@ -1,20 +1,19 @@
 import { Request, Response } from "express";
-import { questions } from "../assets/questions";
+import { questions as q } from "../assets/questions";
 import { shuffleArray } from "../assets/helpers";
 
 export async function getTrivia(req: Request, res: Response) {
   try {
-    if (!Array.isArray(questions) || questions.length === 0) {
+    if (!Array.isArray(q) || q.length === 0) {
       return res.status(404).json({ message: "No questions available" });
     }
-    const shuffledQuestions = shuffleArray(questions);
+    const shuffledQuestions = shuffleArray(q);
 
-    const randomQuestions = shuffledQuestions.slice(0, 10);
+    const questions = shuffledQuestions.slice(0, 10);
 
-    res.json({ questions: randomQuestions });
+    res.status(200).json(questions);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-

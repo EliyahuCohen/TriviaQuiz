@@ -1,26 +1,19 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
-// Your secret key for token verification (replace with your actual secret)
-const secretKey = process.env.SECRET!;
-
-// Middleware to verify user tokens
 function verifyToken(req: Request, res: Response, next: NextFunction) {
-  const token = (req.headers.authorization?.split(' ')[1] as string) || (req.query.token as string) || '';
-
+  const token = req.headers.authorization;
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: "Unauthorized" });
   }
   try {
-    // Verify the token using the secret key
-    const decoded = jwt.verify(token, secretKey);
-
-    // Attach the user ID from the token to the request object
-    (req as any).USER_ID = decoded;
-
+    const decoded:any = jwt.verify(token, process.env.SECRET!);
+    const userId = decoded.userId;
+    req.body.USER_ID = userId;
     next();
   } catch (err) {
-    return res.status(403).json({ message: 'Token is not valid' });
+    console.log(err)
+    return res.status(403).json({ message: "Token is not valid" });
   }
 }
 

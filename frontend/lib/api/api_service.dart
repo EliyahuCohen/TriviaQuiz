@@ -1,3 +1,4 @@
+import 'package:frontend/models/quiz_question.dart';
 import 'package:frontend/types/types.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -9,7 +10,7 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  static ApiService getApi(){
+  static ApiService getApi() {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
@@ -22,4 +23,9 @@ abstract class ApiService {
 
   @POST("/signup")
   Future<UserResponse> signup(@Body() SignUpRequest request);
+
+  // Modify the method to accept a token parameter
+  @GET("/trivia")
+  Future<List<QuizQuestion>> getQuestions(
+      @Header('Authorization') String token);
 }
