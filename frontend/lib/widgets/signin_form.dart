@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/api/api_service.dart';
+import 'package:frontend/context/app_start.dart';
 import 'package:frontend/types/types.dart';
+import 'package:provider/provider.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -19,9 +21,14 @@ class _SignInFormState extends State<SignInForm> {
 
   login() async {
     try {
-      await api.login(LoginRequest(
+      final response = await api.login(LoginRequest(
           email: emailController.text, password: passwordController.text));
-      Navigator.pushNamed(context, "/trivia");
+
+      final appState = Provider.of<AppState>(context, listen: false);
+      print("the response is: $response");
+      appState.setUser(response);
+      Navigator.pushNamed(context, "/");
+
       setState(() {
         isError = false;
       });
@@ -76,7 +83,8 @@ class _SignInFormState extends State<SignInForm> {
             },
             child: Container(
                 color: Colors.amber[500],
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: const Text(
                   "Sign In",
                   style: TextStyle(color: Colors.white),
@@ -85,8 +93,8 @@ class _SignInFormState extends State<SignInForm> {
           isError
               ? Text(
                   errorMessage,
-                  style:
-                      const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.red, fontWeight: FontWeight.bold),
                 )
               : const Text(""),
         ],

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 //routers imports
 import { userRouter } from "./Routes/user.route";
+import { triviaRouter } from "./Routes/trivia.route";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(
 );
 app.use(express.json());
 app.use("/", userRouter);
+app.use("/trivia", triviaRouter);
 mongoose
   .connect(process.env.MONGO_URI!)
   .then(() => {
