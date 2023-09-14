@@ -18,9 +18,6 @@ class ScorePage extends StatelessWidget {
     int correctAnswersCount = answers.where((answer) => answer == 1).length;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Score Page"),
-      ),
       body: Column(
         children: [
           Lottie.network(

@@ -31,4 +31,9 @@ class AppState extends ChangeNotifier {
     _questions = q;
     notifyListeners();
   }
+
+  void gameFinished() {
+    _user?.user.gamesPlayed++;
+    notifyListeners();
+  }
 }

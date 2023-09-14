@@ -39,3 +39,14 @@ class LoginRequest {
       _$LoginRequestFromJson(json);
   Map<String, dynamic> toJson() => _$LoginRequestToJson(this);
 }
+
+@JsonSerializable()
+class TriviaRequest {
+  String score;
+
+  TriviaRequest({required this.score});
+
+  factory TriviaRequest.fromJson(Map<String, dynamic> json) =>
+      _$TriviaRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$TriviaRequestToJson(this);
+}

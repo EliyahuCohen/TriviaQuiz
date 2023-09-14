@@ -59,3 +59,8 @@ export async function signupFunction(req: Request, res: Response) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+export async function getProfile(req:Request,res:Response){
+  const {USER_ID} = req.body;
+  const user = await User.findById(USER_ID);
+  res.status(200).json(user);
+}

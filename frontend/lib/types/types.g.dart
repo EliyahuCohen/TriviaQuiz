@@ -41,3 +41,13 @@ Map<String, dynamic> _$LoginRequestToJson(LoginRequest instance) =>
       'email': instance.email,
       'password': instance.password,
     };
+
+TriviaRequest _$TriviaRequestFromJson(Map<String, dynamic> json) =>
+    TriviaRequest(
+      score: json['score'] as String,
+    );
+
+Map<String, dynamic> _$TriviaRequestToJson(TriviaRequest instance) =>
+    <String, dynamic>{
+      'score': instance.score,
+    };

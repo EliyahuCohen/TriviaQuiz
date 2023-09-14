@@ -7,7 +7,7 @@ class User {
   final String id;
   final String username;
   final String email;
-  final int gamesPlayed;
+  late int gamesPlayed;
 
   User(
       {required this.id,

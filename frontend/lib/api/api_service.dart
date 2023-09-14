@@ -28,4 +28,7 @@ abstract class ApiService {
   @GET("/trivia")
   Future<List<QuizQuestion>> getQuestions(
       @Header('Authorization') String token);
+  @GET("/trivia")
+  Future<dynamic> postTrivia(
+      @Body() TriviaRequest request, @Header('Authorization') String token);
 }
