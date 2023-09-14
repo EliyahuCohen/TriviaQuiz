@@ -20,9 +20,7 @@ class ScorePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Lottie.network(
-              "https://lottie.host/31da7a02-9525-4718-8e61-bcf5ab6047e9/6GA9ncTR8W.json",
-              width: 100),
+          Lottie.asset("lib/assets/cup.json", width: 100),
           ScoreSummary(
             correctAnswersCount: correctAnswersCount,
             totalQuestions: appState.answers.length,
