@@ -6,9 +6,7 @@ import 'package:frontend/widgets/question_card.dart';
 import 'package:provider/provider.dart';
 
 class TriviaPage extends StatefulWidget {
-  const TriviaPage({
-    super.key,
-  });
+  const TriviaPage({Key? key}) : super(key: key);
 
   @override
   State<TriviaPage> createState() => _TriviaPageState();
@@ -26,7 +24,9 @@ class _TriviaPageState extends State<TriviaPage> {
     final apiService = ApiService.getApi();
     final appState = context.read<AppState>();
     app = appState;
-    _questionsFuture = apiService.getQuestions(appState.user!.token);
+    if (appState.user != null) {
+      _questionsFuture = apiService.getQuestions(appState.user!.token);
+    }
   }
 
   void checkAnswer(QuizQuestion question, int questionIndex, int answerIndex) {
@@ -57,13 +57,17 @@ class _TriviaPageState extends State<TriviaPage> {
                 return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              } else if (!snapshot.hasData || snapshot.data == null) {
                 return const Text('No questions available.');
               } else {
-                questions = snapshot.data!;
+                // Filter out questions with null or invalid data
+                questions = snapshot.data!.where((question) {
+                  return question.incorrect_answers != null;
+                }).toList();
+
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: questions!.length,
+                    itemCount: questions?.length,
                     itemBuilder: (context, index) {
                       final question = questions![index];
                       return QuestionCard(
@@ -77,7 +81,7 @@ class _TriviaPageState extends State<TriviaPage> {
               }
             },
           ),
-          if (allQuestionsAnswered)
+          if (allQuestionsAnswered && questions != null)
             Container(
               color: Colors.amber[200],
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

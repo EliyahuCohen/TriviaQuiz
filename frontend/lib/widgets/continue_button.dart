@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:frontend/context/app_start.dart'; // Import your AppState class
 
 class ContinuePage extends StatelessWidget {
-  const ContinuePage({Key? key});
+  const ContinuePage({super.key});
 
   @override
   Widget build(BuildContext context) {

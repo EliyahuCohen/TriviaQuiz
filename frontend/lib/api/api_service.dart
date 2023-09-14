@@ -1,4 +1,5 @@
 import 'package:frontend/models/quiz_question.dart';
+import 'package:frontend/models/score.dart';
 import 'package:frontend/types/types.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -28,7 +29,11 @@ abstract class ApiService {
   @GET("/trivia")
   Future<List<QuizQuestion>> getQuestions(
       @Header('Authorization') String token);
-  @GET("/trivia")
+
+  @POST("/trivia/new")
   Future<dynamic> postTrivia(
       @Body() TriviaRequest request, @Header('Authorization') String token);
+
+  @GET("/trivia/score")
+  Future<List<Score>> getScores(@Header('Authorization') String token);
 }

@@ -12,13 +12,16 @@ class LogoutButton extends StatelessWidget {
       user.logout();
     }
 
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         ElevatedButton(
           onPressed: logout,
           child: const Text('Logout'),
         ),
+        const SizedBox(
+          height: 30,
+        )
       ],
     );
   }

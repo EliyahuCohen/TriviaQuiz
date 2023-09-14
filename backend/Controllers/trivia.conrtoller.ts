@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { questions as q } from "../assets/questions";
 import { shuffleArray } from "../assets/helpers";
-import User from '../Models/user.model';
+import User from "../Models/user.model";
 import ScoreModel from "../Models/score.model";
 
 export async function getTrivia(req: Request, res: Response) {
@@ -25,9 +25,17 @@ export async function postTrivia(req: Request, res: Response) {
   const Score = await ScoreModel.create({
     userId: USER_ID,
     score: score,
-    userName:user?.username
+    userName: user?.username,
   });
   user!.gamesPlayed++;
   await user?.save();
-  res.status(200).json({message:"Score Saved "+user?.username})
+  res.status(200).json({ message: "Score Saved " + user?.username });
+}
+export async function getUserScores(req: Request, res: Response) {
+  //here we are going to grab the user id and than give him from the Trivia Collection all of the info that is realted to him
+  const { USER_ID } = req.body;
+  const scores = await ScoreModel.find({
+    userId: USER_ID,
+  });
+  return res.status(200).json(scores);
 }
