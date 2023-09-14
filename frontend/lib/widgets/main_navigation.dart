@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/context/app_start.dart';
 import 'package:frontend/pages/history_page.dart';
 import 'package:frontend/pages/profile_page.dart';
+import 'package:frontend/pages/rules_page.dart';
 import 'package:frontend/pages/score_page.dart';
 import 'package:frontend/pages/trivia_page.dart';
 import 'package:frontend/widgets/logout_button.dart';
@@ -68,7 +69,7 @@ class MainNavigation extends StatelessWidget {
       ),
       body: Navigator(
         // Use Navigator for the page content
-        initialRoute: 'profile', // Set the initial route to '/profile'
+        initialRoute: 'rules', // Set the initial route to '/profile'
         onGenerateRoute: (settings) {
           WidgetBuilder builder;
           switch (settings.name) {
@@ -87,6 +88,10 @@ class MainNavigation extends StatelessWidget {
             case 'score':
               builder = (BuildContext context) =>
                   const ScorePage(); // Replace with your game page widget
+              break;
+            case 'rules':
+              builder = (BuildContext context) =>
+                  const RulesPage(); // Replace with your game page widget
               break;
             default:
               throw Exception('Invalid route: ${settings.name}');

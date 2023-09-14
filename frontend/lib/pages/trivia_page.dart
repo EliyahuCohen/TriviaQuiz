@@ -48,41 +48,41 @@ class _TriviaPageState extends State<TriviaPage> {
       appBar: AppBar(
         title: const Text("Trivia Page"),
       ),
-      body: Column(
-        children: [
-          FutureBuilder<List<QuizQuestion>>(
-            future: _questionsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else if (!snapshot.hasData || snapshot.data == null) {
-                return const Text('No questions available.');
-              } else {
-                // Filter out questions with null or invalid data
-                questions = snapshot.data!.where((question) {
-                  return question.incorrect_answers != null;
-                }).toList();
+      body: SingleChildScrollView(
+        child: FutureBuilder<List<QuizQuestion>>(
+          future: _questionsFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData || snapshot.data == null) {
+              return const Text('No questions available.');
+            } else {
+              // Filter out questions with null or invalid data
+              questions = snapshot.data!.where((question) {
+                return question.incorrect_answers != null;
+              }).toList();
 
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: questions?.length,
-                    itemBuilder: (context, index) {
-                      final question = questions![index];
-                      return QuestionCard(
-                        question: question,
-                        index: index,
-                        selectFunction: checkAnswer,
-                      );
-                    },
-                  ),
-                );
-              }
-            },
-          ),
-          if (allQuestionsAnswered && questions != null)
-            Container(
+              return ListView.builder(
+                shrinkWrap:
+                    true, // Allow the ListView to scroll within a SingleChildScrollView
+                itemCount: questions?.length,
+                itemBuilder: (context, index) {
+                  final question = questions![index];
+                  return QuestionCard(
+                    question: question,
+                    index: index,
+                    selectFunction: checkAnswer,
+                  );
+                },
+              );
+            }
+          },
+        ),
+      ),
+      bottomNavigationBar: allQuestionsAnswered && questions != null
+          ? Container(
               color: Colors.amber[200],
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: GestureDetector(
@@ -93,17 +93,15 @@ class _TriviaPageState extends State<TriviaPage> {
                 child: const Text("Move To Results"),
               ),
             )
-          else
-            Container(
+          : Container(
               color: Colors.red[200],
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: const Text(
                 "Please answer all questions to proceed.",
                 style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
               ),
             ),
-        ],
-      ),
     );
   }
 }
