@@ -80,10 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.network(
-                  "https://lottie.host/9314e067-91c2-427a-97e3-d1f58ff843e3/VKEpgV3sD8.json",
-                  width: 400,
-                  height: 350),
+              Lottie.asset("lib/assets/register.json", width: 400, height: 350),
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(

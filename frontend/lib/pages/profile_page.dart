@@ -22,8 +22,8 @@ class ProfilePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 const SizedBox(height: 20.0),
-                Lottie.network(
-                  "https://lottie.host/cfe530df-8c56-4f5c-a3ed-c67113e8f409/kO3mq4uBqB.json",
+                Lottie.asset(
+                  "lib/assets/user.json",
                   height: 300,
                 ),
                 const SizedBox(height: 20.0),
