@@ -105,7 +105,7 @@ export const questions = [
     difficulty: "medium",
     question: "What is the largest organ in the human body?",
     correct_answer: "Skin",
-    incorrect_answers: ["Heart", , "Brain", "Skin", "Liver"],
+    incorrect_answers: ["Heart", "Brain", "Skin", "Liver"],
   },
   {
     category: "Medical",
@@ -218,7 +218,7 @@ export const questions = [
       "Michael Jackson",
       "Elvis Presley",
       "Madonna",
-      "Prince",
+      "Prince"
     ],
   },
   // Flowers
