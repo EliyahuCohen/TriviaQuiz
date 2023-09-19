@@ -25,7 +25,6 @@ class _SignInFormState extends State<SignInForm> {
           email: emailController.text, password: passwordController.text));
 
       final appState = Provider.of<AppState>(context, listen: false);
-      print("the response is: $response");
       appState.setUser(response);
       Navigator.pushNamed(context, "/");
 
@@ -35,7 +34,7 @@ class _SignInFormState extends State<SignInForm> {
     } catch (e) {
       setState(() {
         isError = true;
-        errorMessage = "error while fetching from the API";
+        errorMessage = "Server Error 🥺";
       });
     }
   }

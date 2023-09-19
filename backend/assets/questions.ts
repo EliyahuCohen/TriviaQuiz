@@ -205,7 +205,7 @@ export const questions = [
       "Jimmy Page",
       "Brian May",
       "Jimi Hendrix",
-      "Eddie Van Halen",
+      "Eddie Van Halen"
     ],
   },
   {

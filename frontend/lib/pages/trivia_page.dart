@@ -49,36 +49,44 @@ class _TriviaPageState extends State<TriviaPage> {
         title: const Text("Trivia Page"),
       ),
       body: SingleChildScrollView(
-        child: FutureBuilder<List<QuizQuestion>>(
-          future: _questionsFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (!snapshot.hasData || snapshot.data == null) {
-              return const Text('No questions available.');
-            } else {
-              // Filter out questions with null or invalid data
-              questions = snapshot.data!.where((question) {
-                return question.incorrect_answers != null;
-              }).toList();
+        child: Column(
+          children: [
+            FutureBuilder<List<QuizQuestion>>(
+              future: _questionsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data == null) {
+                  return const Text('No questions available.');
+                } else {
+                  // Filter out questions with null or invalid data
+                  questions = snapshot.data!.where((question) {
+                    return question.incorrect_answers != null;
+                  }).toList();
 
-              return ListView.builder(
-                shrinkWrap:
-                    true, // Allow the ListView to scroll within a SingleChildScrollView
-                itemCount: questions?.length,
-                itemBuilder: (context, index) {
-                  final question = questions![index];
-                  return QuestionCard(
-                    question: question,
-                    index: index,
-                    selectFunction: checkAnswer,
+                  return ListView.builder(
+                    physics:
+                        NeverScrollableScrollPhysics(), // Prevent scrolling
+                    shrinkWrap: true,
+                    itemCount: questions?.length,
+                    itemBuilder: (context, index) {
+                      final question = questions![index];
+                      return QuestionCard(
+                        question: question,
+                        index: index,
+                        selectFunction: checkAnswer,
+                      );
+                    },
                   );
-                },
-              );
-            }
-          },
+                }
+              },
+            ),
+            SizedBox(
+                height:
+                    16.0), // Add some spacing between the ListView and the bottomNavigationBar
+          ],
         ),
       ),
       bottomNavigationBar: allQuestionsAnswered && questions != null

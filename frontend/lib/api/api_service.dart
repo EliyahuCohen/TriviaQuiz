@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: "http://localhost:3000")
+@RestApi(baseUrl: "http://192.168.212.163:3000")
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 

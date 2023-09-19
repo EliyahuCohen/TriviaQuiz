@@ -6,8 +6,6 @@ const JWT_SECRET = process.env.SECRET!; // Replace with your actual JWT secret
 
 export async function loginFunction(req: Request, res: Response) {
   const { email, password } = req.body;
-
- 
   try {
     const newUser = await User.findOne({ email });
 
